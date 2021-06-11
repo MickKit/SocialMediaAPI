@@ -1,0 +1,78 @@
+﻿
+<script src="../Scripts/jquery-3.4.1.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+    .w3-border {
+        border: 1px solid #ccc !important;
+    }
+</style>
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
+    <p><a href="#" id="btngettokenfacebook" class="btn btn-primary btn-lg">Get Token Facebook Page</a></p>
+    <div id="ZoneauthComplete" style="display:none;">
+        <h3>Your Access Token Page was received as:</h3>
+        <div class="w3-border" id="accesstokenpage" style="word-wrap:break-word;">aa</div>
+        <h4>expires_in : </h4>
+        <div class="w3-border" id="expires_in" style="word-wrap:break-word;"></div>
+        <h4>token_type : </h4>
+        <div class="w3-border" id="token_type" style="word-wrap:break-word;"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
+            a broad range of clients, including browsers and mobile devices. ASP.NET Web API
+            is an ideal platform for building RESTful applications on the .NET Framework.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+
+<script>
+    $('#btngettokenfacebook').click(function () {
+        var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
+
+        var externalProviderUrl = location.protocol + '//' + location.host + '/api/GetTokenFacebook' + "?&redirect_uri=" + redirectUri + "";
+
+        var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
+    });
+
+    function authComplete(data) {
+        // get token page from token user
+        var data = { access_token: data.access_token, PageID: '105880407641515' };
+        var urlapi = location.protocol + '//' + location.host + '/api/GetTokenPageFacebook'
+        $.ajax({
+            url: urlapi,
+            type: 'GET',
+            data: data,
+            dataType: 'json',
+            success: function (data, textStatus, xhr) {
+                // Long-Lived Access Tokens
+                if (data.length) {
+                    $('#accesstokenpage').text(data[0].access_token);
+                    $('#expires_in').text(data[0].expires_in);
+                    $('#token_type').text(data[0].token_type);
+                    $('#ZoneauthComplete').show();
+                }
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('a' + textStatus);
+            }
+        });
+    }
+
+</script>
