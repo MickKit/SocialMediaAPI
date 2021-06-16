@@ -1,9 +1,37 @@
 ﻿
 <script src="../Scripts/jquery-3.4.1.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../Scripts/emojionearea.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" type="text/css" href="../Content/emojionearea.min.css" media="screen">
 <style>
     .w3-border {
         border: 1px solid #ccc !important;
     }
+
+    .loading {
+        position: fixed;
+        z-index: 999;
+        height: 2em;
+        width: 2em;
+        overflow: show;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+        /* Transparent Overlay */
+        .loading:before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
+            background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+        }
 </style>
 <div class="jumbotron">
     <h1>ASP.NET</h1>
@@ -31,6 +59,54 @@
         <h4>token_type : </h4>
         <div class="w3-border" id="Linetoken_type" style="word-wrap:break-word;"></div>
     </div>
+    <textarea id="example1">
+‼สุดคุ้ม โต๊ะพูล 4in1‼
+🚛🚚ส่งฟรี-ทั่วประเทศ🚛🚚
+🎱🏑🏓ซื้อ 1เล่นได้ได้ถึง 4 อย่าง♠🎲♟
+🎉โต๊ะ​พูล,แอร์​ฮอกกี้,ปิงปอง,โต๊ะ​อเนกประสงค์🎉
+💥 พร้อมส่ง ถูกกว่าทุกที่ สินค้ารับประกัน 1ปี 💥
+🔥ราคาเพียง 29,900บาทเท่านั้น🔥
+🚨โปรของแถมฟรี!!มูลค่า​มากกว่า 2500บาท🚨
+✅ผ้าคลุม​โต๊ะ​กันน้ำ✅
+✅ไม้พูลสั้นเพิ่มเติมจากในชุด✅
+✅อุปกรณ์การเล่นครบชุด✅
+‼รับผ่อนชำระผ่านบัตรเครดิต ดอกเบี้ย 0% นานถึง 10 เดือน‼
+โทรสอบถาม-สั่งซื้อ:
+085-945-4567
+081-559-9441
+Line:สามารถแอดตามเบอร์โทรได้เลยค่ะ!!
+📌 ขนาด: 203×112×81 ซม.
+📌 สามารถ​หมุนสลับ เปลี่ยนโต๊ะได้ถึง 4แบบ
+📌แถม! อุปกรณ์​ที่ใช้ในการเล่นแบบ​มาตรฐาน​ ครบชุด!
+</textarea>
+    <div>
+        <input class="form-check-input" type="checkbox" name="checkboxsocial" id="FacebookCheckbox" value="Facebook" disabled>
+        <label for="vehicle1" style=" margin-right: 7px; "> Facebook</label>
+        <input class="form-check-input" type="checkbox" name="checkboxsocial" id="LineCheckbox" value="Line" disabled>
+        <label for="vehicle1"> Line</label>
+    </div>
+
+    <div class="loading" style="display:none;">
+        <div class="lds-ring">
+            <div style="
+            border-color: #7e9485 transparent transparent transparent;
+        "></div><div style="
+            border-color: #7e9485 transparent transparent transparent;
+        "></div><div style="
+            border-color: #7e9485 transparent transparent transparent;
+        "></div><div style="
+            border-color: #7e9485 transparent transparent transparent;
+        "></div>
+        </div>
+    </div>
+
+
+    <a href="#" id="btnsubmit" class="btn btn-primary btn-lg" style="
+    background-color: #ffffff;
+    border-color: #000;
+    margin-top: 10px;
+    color: #000;
+    " disabled>Submit</a>
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -54,8 +130,59 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="SuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="success-checkmark" style=" margin-top: 17px; height: 98px; width: 88px; ">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+                <h3 style=" text-align: center; margin-top: 0px; ">Success</h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="FailedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="error-banmark">
+                    <div class="ban-icon">
+                        <span class="icon-line line-long-invert"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+                <h3 style=" text-align: center; margin-top: 0px; ">Failed</h3>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script>
+
+    var access_tokenfacebook = '';
+    var access_tokenline = '';
+
+
+    $("#example1").emojioneArea({
+        autoHideFilters: true
+    });
+
+
     $('#btngettokenfacebook').click(function () {
         var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
 
@@ -66,7 +193,7 @@
 
     $('#btngettokenline').click(function () {
 
-        var externalProviderUrlAPI = location.protocol + '//' + location.host + '/api/GenerateTokenLine' ;
+        var externalProviderUrlAPI = location.protocol + '//' + location.host + '/api/GenerateTokenLine';
         var data = {};
         $.ajax({
             url: externalProviderUrlAPI,
@@ -76,10 +203,12 @@
             success: function (data, textStatus, xhr) {
                 // Long-Lived Access Tokens
                 if (data.length) {
+                    access_tokenline = data[0].access_token;
                     $('#Lineaccesstoken').text(data[0].access_token);
                     $('#Lineexpires_in').text(data[0].expires_in);
                     $('#Linetoken_type').text(data[0].token_type);
                     $('#ZoneGettokenLineComplete').show();
+                    $('#LineCheckbox').removeAttr('disabled');
                 }
 
             },
@@ -88,6 +217,98 @@
             }
         });
     });
+
+    $('input[name="checkboxsocial"]').change(function () {
+        console.log($('input[name="checkboxsocial"]:checked').length)
+        if ($('input[name="checkboxsocial"]:checked').length) {
+            $("#btnsubmit").removeAttr('disabled');
+        } else {
+            $("#btnsubmit").attr('disabled', 'disabled');
+        }
+
+    })
+    var flagsuccess = false;
+
+    $('#btnsubmit').click(function () {
+        $("#btnsubmit").attr('disabled', 'disabled');
+        $('.loading').show();
+        flagsuccess = false;
+        // check checked facebook
+        if ($('input[id="FacebookCheckbox"]:checked').length) {
+            var externalProviderUrlAPI = location.protocol + '//' + location.host + '/api/PostOnPageWall';
+            var data = { token: access_tokenfacebook, PageID: "105880407641515", Message: $('#example1').val() };
+            data = JSON.stringify(data);
+            $.ajax({
+                url: externalProviderUrlAPI,
+                async: false,
+                type: 'POST',
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (data, textStatus, xhr) {
+                    // Long-Lived Access Tokens
+                    if (data.length) {
+                        idpost = data[0].id;
+                        console.log(idpost);
+                        if (data[0].id != undefined) {
+                            flagsuccess = true;
+                        }
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('a' + textStatus);
+                }
+            });
+        }
+
+        if ($('input[id="LineCheckbox"]:checked').length) {
+            var externalProviderUrlAPI = location.protocol + '//' + location.host + '/api/PushMessageBroadcast';
+            var messages = [];
+            var objectMessagesLine = { type: "text", text: $('#example1').val() };
+            messages.push(objectMessagesLine);
+
+            var data = { BearerToken: access_tokenline, messages: messages };
+            data = JSON.stringify(data);
+            $.ajax({
+                url: externalProviderUrlAPI,
+                async: false,
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                dataType: 'json',
+                success: function (data, textStatus, xhr) {
+                    // Long-Lived Access Tokens
+                    if (data.length) {
+                        if ($.isEmptyObject(data[0])) {
+                            console.log('Line pust success');
+                            flagsuccess = true;
+                        } else {
+                            flagsuccess = false;
+                        }
+
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('a' + textStatus);
+                }
+            });
+        }
+
+        $('.loading').hide();
+        $("#btnsubmit").removeAttr('disabled');
+
+        if (flagsuccess == true) {
+            $('#SuccessModal').modal();
+        } else {
+            $('#FailedModal').modal();
+
+        }
+
+
+    });
+
 
     function authComplete(data) {
         // get token page from token user
@@ -101,10 +322,13 @@
             success: function (data, textStatus, xhr) {
                 // Long-Lived Access Tokens
                 if (data.length) {
+                    access_tokenfacebook = data[0].access_token;
+
                     $('#accesstokenpage').text(data[0].access_token);
                     $('#expires_in').text(data[0].expires_in);
                     $('#token_type').text(data[0].token_type);
                     $('#ZoneauthComplete').show();
+                    $('#FacebookCheckbox').removeAttr('disabled');
                 }
 
             },

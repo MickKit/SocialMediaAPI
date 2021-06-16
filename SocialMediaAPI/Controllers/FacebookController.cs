@@ -41,7 +41,7 @@ namespace SocialMediaAPI.Controllers
             if (length > 0)
             {
                 Returnaccess_token = result[0].access_token;
-                var ExtendAccessTokenTask = facebookService.ExtendAccessTokenAsync(access_token, PageID);
+                var ExtendAccessTokenTask = facebookService.ExtendAccessTokenAsync(Returnaccess_token, PageID);
                 resultExtendAccessToken = await Task.WhenAll(ExtendAccessTokenTask);
             }
             return resultExtendAccessToken;
