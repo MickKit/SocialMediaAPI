@@ -10,6 +10,8 @@ namespace SocialMediaAPI.DAO
     public interface ILineService
     {
         Task<dynamic> PushMessageBroadcastAsync(string BearerToken, object message);
+        Task<dynamic> PushMessageToUserAsync(string BearerToken, object to, object message);
+
     }
 
     public class LineService : ILineService
@@ -27,6 +29,12 @@ namespace SocialMediaAPI.DAO
         public async Task<dynamic> PushMessageBroadcastAsync(string BearerToken , object messages)
         {
             var result = await _lineClient.PostAsync<dynamic>(BearerToken, "message/broadcast", new { messages });
+            return result;
+        }
+
+        public async Task<dynamic> PushMessageToUserAsync(string BearerToken, object to, object messages)
+        {
+            var result = await _lineClient.PostAsync<dynamic>(BearerToken, "message/multicast", new { to, messages });
             return result;
         }
 

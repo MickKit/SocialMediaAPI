@@ -26,6 +26,18 @@ namespace SocialMediaAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [Route("api/PushMessageToUser")]
+        public async Task<dynamic> PushMessageToUser([FromBody] LineMessage LineMessage)
+        {
+            var lineClient = new LineClient("https://api.line.me/v2/bot/");
+            var lineService = new LineService(lineClient);
+            var PushMessageToUser = lineService.PushMessageToUserAsync(LineMessage.BearerToken, LineMessage.to, LineMessage.messages);
+            var result = await Task.WhenAll(PushMessageToUser);
+            return result;
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
         [Route("api/GenerateTokenLine")]
         public async Task<dynamic> GenerateTokenLine()
         {
