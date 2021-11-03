@@ -14,5 +14,13 @@ namespace SocialMediaAPI.Controllers
 
             return View();
         }
+
+
+        public ActionResult DrawingControl()
+        {
+            ViewBag.Title = "Drawing page";
+
+            return View();
+        }
     }
 }
