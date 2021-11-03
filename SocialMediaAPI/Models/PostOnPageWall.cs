@@ -11,5 +11,8 @@ namespace SocialMediaAPI.Models
         public string PageID { get; set; }
         public string Message { get; set; }
 
+        public string Url { get; set; }
+
+
     }
 }

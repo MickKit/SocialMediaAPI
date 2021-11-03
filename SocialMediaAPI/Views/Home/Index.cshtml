@@ -256,7 +256,7 @@ Line:สามารถแอดตามเบอร์โทรได้เล
         // check checked facebook
         if ($('input[id="FacebookCheckbox"]:checked').length) {
             var externalProviderUrlAPI = location.protocol + '//' + location.host + '/api/PostOnPageWall';
-            var data = { token: access_tokenfacebook, PageID: "105880407641515", Message: $('#example1').val() };
+            var data = { token: access_tokenfacebook, PageID: "112493804566010", Message: $('#example1').val() };
             data = JSON.stringify(data);
             $.ajax({
                 url: externalProviderUrlAPI,
@@ -368,7 +368,7 @@ Line:สามารถแอดตามเบอร์โทรได้เล
 
     function authComplete(data) {
         // get token page from token user
-        var data = { access_token: data.access_token, PageID: '105880407641515' };
+        var data = { access_token: data.access_token, PageID: '112493804566010' };
         var urlapi = location.protocol + '//' + location.host + '/api/GetTokenPageFacebook'
         $.ajax({
             url: urlapi,

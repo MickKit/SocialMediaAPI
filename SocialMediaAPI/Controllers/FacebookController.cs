@@ -60,6 +60,18 @@ namespace SocialMediaAPI.Controllers
             return result;
         }
 
-      
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/PostPhotoOnPageWall")]
+        public async Task<dynamic> PostPhotoOnPageWall([FromBody] PostOnPageWall PostOnPageWall)
+        {
+            var facebookClient = new FacebookClient();
+            var facebookService = new FacebookService(facebookClient);
+            var postOnPageWallTask = facebookService.PostPhotoOnPageWallAsync(PostOnPageWall.token, PostOnPageWall.PageID, PostOnPageWall.Url);
+            var result = await Task.WhenAll(postOnPageWallTask);
+            return result;
+        }
+
+
     }
 }

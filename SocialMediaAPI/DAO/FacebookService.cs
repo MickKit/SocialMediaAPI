@@ -11,6 +11,8 @@ namespace SocialMediaAPI.DAO
     {
         Task<Account> GetAccountAsync(string accessToken);
         Task<dynamic> PostOnPageWallAsync(string accessToken, string PageID, string message);
+        Task<dynamic> PostPhotoOnPageWallAsync(string accessToken, string PageID, string url);
+
     }
 
     public class FacebookService : IFacebookService
@@ -51,6 +53,12 @@ namespace SocialMediaAPI.DAO
         {
             var result = await _facebookClient.PostAsync<dynamic>(accessToken, ""+ PageID + "/feed", new { message });
             return result;  
+        }
+
+        public async Task<dynamic> PostPhotoOnPageWallAsync(string accessToken, string PageID, string url)
+        {
+            var result = await _facebookClient.PostAsync<dynamic>(accessToken, "" + PageID + "/photos", new { url }) ;
+            return result;
         }
 
         public async Task<dynamic> ExtendAccessTokenAsync(string accessToken, string PageID)
